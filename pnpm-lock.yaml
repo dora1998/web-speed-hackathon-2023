@@ -71,6 +71,7 @@ specifiers:
   stylelint: 15.1.0
   stylelint-config-recommended: 10.0.1
   stylelint-order: 6.0.2
+  subset-font: 2.0.0
   throttle-debounce: 5.0.0
   ts-node: 10.9.1
   typeorm: 0.3.11
@@ -159,6 +160,7 @@ devDependencies:
   stylelint: 15.1.0
   stylelint-config-recommended: 10.0.1_stylelint@15.1.0
   stylelint-order: 6.0.2_stylelint@15.1.0
+  subset-font: 2.0.0
   ts-node: 10.9.1_5xt73ckh5yeuoh5h2clfjvetua
   typescript: 4.9.3
   vite: 4.1.4_@types+node@18.11.15
@@ -3487,6 +3489,13 @@ packages:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: true
 
+  /fontverter/2.0.0:
+    resolution: {integrity: sha512-DFVX5hvXuhi1Jven1tbpebYTCT9XYnvx6/Z+HFUPb7ZRMCW+pj2clU9VMhoTPgWKPhAs7JJDSk3CW1jNUvKCZQ==}
+    dependencies:
+      wawoff2: 2.0.1
+      woff2sfnt-sfnt2woff: 1.0.0
+    dev: true
+
   /form-data/3.0.1:
     resolution: {integrity: sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==}
     engines: {node: '>= 6'}
@@ -3771,6 +3780,10 @@ packages:
   /hard-rejection/2.1.0:
     resolution: {integrity: sha512-VIZB+ibDhx7ObhAe7OVtoEbuP4h/MuOTHJ+J8h/eBXotJYl0fBgR72xDFCKgIh22OJZIOVNxBMWuhAr10r8HdA==}
     engines: {node: '>=6'}
+    dev: true
+
+  /harfbuzzjs/0.3.1:
+    resolution: {integrity: sha512-ut4BzDi4AmrKukuv2NqSqShgGHBUaJu9euswkwUR3GyebDSiPXybLJJyJS4Daakx2UWpPuZ7afXJZaje61Actw==}
     dev: true
 
   /has-bigints/1.0.2:
@@ -4497,7 +4510,6 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: false
 
   /loglevel/1.8.1:
     resolution: {integrity: sha512-tCRIJM51SHjAayKwC+QAg8hT8vg6z7GSgLJKGvzuPb1Wc+hLzqtuVLxp6/HzSPOozuK+8ErAhy7U/sVzw8Dgfg==}
@@ -5159,6 +5171,10 @@ packages:
   /p-try/2.2.0:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
     engines: {node: '>=6'}
+    dev: true
+
+  /pako/1.0.11:
+    resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
     dev: true
 
   /parent-module/1.0.1:
@@ -6254,6 +6270,15 @@ packages:
     resolution: {integrity: sha512-GP6WDNWf+o403jrEp9c5jibKavrtLW+/qYGhFxFrG8maXhwTBI7gLLhiBb0o7uFccWN+EOS9aMO6cGHWAO07OA==}
     dev: false
 
+  /subset-font/2.0.0:
+    resolution: {integrity: sha512-jRvxHrLz5an/F2kg335EM2yFXY12gSQ5ZibJ7K1lxawpPOLoENuuKgyhY7aszScy63eyYSzbVUBDKTYMupVq9A==}
+    dependencies:
+      fontverter: 2.0.0
+      harfbuzzjs: 0.3.1
+      lodash: 4.17.21
+      p-limit: 3.1.0
+    dev: true
+
   /supports-color/5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
     engines: {node: '>=4'}
@@ -6771,6 +6796,13 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
+  /wawoff2/2.0.1:
+    resolution: {integrity: sha512-r0CEmvpH63r4T15ebFqeOjGqU4+EgTx4I510NtK35EMciSdcTxCw3Byy3JnBonz7iyIFZ0AbVo0bbFpEVuhCYA==}
+    hasBin: true
+    dependencies:
+      argparse: 2.0.1
+    dev: true
+
   /webidl-conversions/3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
     dev: false
@@ -6816,6 +6848,12 @@ packages:
     dependencies:
       string-width: 4.2.3
     dev: false
+
+  /woff2sfnt-sfnt2woff/1.0.0:
+    resolution: {integrity: sha512-edK4COc1c1EpRfMqCZO1xJOvdUtM5dbVb9iz97rScvnTevqEB3GllnLWCmMVp1MfQBdF1DFg/11I0rSyAdS4qQ==}
+    dependencies:
+      pako: 1.0.11
+    dev: true
 
   /word-wrap/1.2.3:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
