@@ -1,5 +1,6 @@
 import * as currencyFormatter from 'currency-formatter';
 import type { FC } from 'react';
+import { useMemo } from 'react';
 
 import type { FeatureItemFragmentResponse } from '../../../graphql/fragments';
 import { useActiveOffer } from '../../../hooks/useActiveOffer';
@@ -18,12 +19,17 @@ export const ProductCard: FC<Props> = ({ product }) => {
   const { activeOffer } = useActiveOffer(product.offers);
   const price = activeOffer?.price ?? product.price;
 
+  const thumbFilename = useMemo(
+    () => product.thumbnail.file.filename.replace(/\.jpg$/, '_thumb.jpg'),
+    [product.thumbnail.file.filename],
+  );
+
   return (
     <Anchor href={`/product/${product.id}`}>
       <div className={styles.inner()}>
         <div className={styles.image()}>
           <AspectRatio ratioHeight={9} ratioWidth={16}>
-            <Image height={126} loading="lazy" src={product.thumbnail.file.filename} width={224} />
+            <Image height={126} loading="lazy" src={thumbFilename} width={224} />
           </AspectRatio>
         </div>
         <div className={styles.description()}>
