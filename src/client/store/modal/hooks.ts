@@ -1,26 +1,26 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useContext } from 'react';
 
+import { ModalStateContext } from './context';
 import type { ModalKey } from './state';
-import { modalState } from './state';
 
 export const useIsOpenModal = (key: ModalKey) => {
-  const modalKey = useRecoilValue(modalState);
+  const { state } = useContext(ModalStateContext);
 
-  return modalKey === key;
+  return state === key;
 };
 
 export const useOpenModal = () => {
-  const setModal = useSetRecoilState(modalState);
+  const { update } = useContext(ModalStateContext);
 
   return (key: ModalKey) => {
-    setModal(key);
+    update(key);
   };
 };
 
 export const useCloseModal = () => {
-  const setModal = useSetRecoilState(modalState);
+  const { update } = useContext(ModalStateContext);
 
   return () => {
-    setModal(undefined);
+    update(undefined);
   };
 };

@@ -1,6 +1,4 @@
-import _ from 'lodash';
 import type { FC } from 'react';
-import { memo } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 
 import type { ProductFragmentResponse } from '../../../graphql/fragments';
@@ -19,55 +17,56 @@ type Props = {
   onOpenSignInModal: () => void;
 };
 
-export const ProductPurchaseSection: FC<Props> = memo(
-  ({ amountInCart, isAuthUser, onOpenSignInModal, onUpdateCartItem, product }) => {
-    if (product === undefined) {
-      return null;
-    }
+export const ProductPurchaseSection: FC<Props> = ({
+  amountInCart,
+  isAuthUser,
+  onOpenSignInModal,
+  onUpdateCartItem,
+  product,
+}) => {
+  if (product === undefined) {
+    return null;
+  }
 
-    if (!isAuthUser) {
-      return (
-        <div className={styles.container()}>
-          <div className={styles.signInWrapper()}>
-            <span className={styles.signIn()}>購入にはログインが必要です</span>
-            <PrimaryButton onClick={() => onOpenSignInModal()} size="sm">
-              ログイン
-            </PrimaryButton>
-          </div>
-        </div>
-      );
-    }
-
-    if (amountInCart === 0) {
-      return (
-        <div className={styles.container()}>
-          <PrimaryButton onClick={() => onUpdateCartItem(product.id, 1)} size="sm">
-            カートに追加
-          </PrimaryButton>
-        </div>
-      );
-    }
-
+  if (!isAuthUser) {
     return (
       <div className={styles.container()}>
-        <p className={styles.amount()}>
-          <span className={styles.checkIcon()}>
-            <Icon color="#3BA175" height={18} icon={FaCheckCircle} width={18} />
-          </span>
-          <span>{amountInCart}個 カートに追加済み</span>
-        </p>
-        <div className={styles.actionButtonList()}>
-          <PrimaryAnchor href="/order" size="base">
-            購入手続きへ
-          </PrimaryAnchor>
-          <OutlineButton onClick={() => onUpdateCartItem(product.id, amountInCart + 1)} size="lg">
-            カートに追加
-          </OutlineButton>
+        <div className={styles.signInWrapper()}>
+          <span className={styles.signIn()}>購入にはログインが必要です</span>
+          <PrimaryButton onClick={() => onOpenSignInModal()} size="sm">
+            ログイン
+          </PrimaryButton>
         </div>
       </div>
     );
-  },
-  _.isEqual,
-);
+  }
 
-ProductPurchaseSection.displayName = 'ProductPurchaseSection';
+  if (amountInCart === 0) {
+    return (
+      <div className={styles.container()}>
+        <PrimaryButton onClick={() => onUpdateCartItem(product.id, 1)} size="sm">
+          カートに追加
+        </PrimaryButton>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.container()}>
+      <p className={styles.amount()}>
+        <span className={styles.checkIcon()}>
+          <Icon color="#3BA175" height={18} icon={FaCheckCircle} width={18} />
+        </span>
+        <span>{amountInCart}個 カートに追加済み</span>
+      </p>
+      <div className={styles.actionButtonList()}>
+        <PrimaryAnchor href="/order" size="base">
+          購入手続きへ
+        </PrimaryAnchor>
+        <OutlineButton onClick={() => onUpdateCartItem(product.id, amountInCart + 1)} size="lg">
+          カートに追加
+        </OutlineButton>
+      </div>
+    </div>
+  );
+};
