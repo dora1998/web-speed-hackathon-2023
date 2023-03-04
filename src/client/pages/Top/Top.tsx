@@ -12,10 +12,6 @@ export const Top: FC = () => {
   const { recommendation } = useRecommendation();
   const { features } = useFeatures();
 
-  if (recommendation === undefined || features === undefined) {
-    return null;
-  }
-
   return (
     <>
       <Helmet>

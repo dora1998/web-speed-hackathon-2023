@@ -1,18 +1,18 @@
 import type { FC } from 'react';
+import { Suspense } from 'react';
 
 import { SignInModal } from '../../modal/SignInModal';
 import { SignUpModal } from '../../modal/SignUpModal';
-import { Layout } from '../Layout';
 import { Providers } from '../Providers';
 import { Routes } from '../Routes';
 
 export const App: FC = () => (
-  <Providers>
-    <Layout>
+  <Suspense fallback={null}>
+    <Providers>
       <Routes />
-    </Layout>
 
-    <SignInModal />
-    <SignUpModal />
-  </Providers>
+      <SignInModal />
+      <SignUpModal />
+    </Providers>
+  </Suspense>
 );
