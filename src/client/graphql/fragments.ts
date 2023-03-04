@@ -210,17 +210,26 @@ export type AuthUserFragmentResponse = UserFragmentResponse & {
 };
 
 export const FeatureItemFragment = gql`
-  ${ProductFragment}
+  ${ProductMediaFragment}
+  ${LimitedTimeOfferFragment}
 
   fragment FeatureItemFragment on FeatureItem {
     id
     product {
-      ...ProductFragment
+      id
+      name
+      price
+      media {
+        ...ProductMediaFragment
+      }
+      offers {
+        ...LimitedTimeOfferFragment
+      }
     }
   }
 `;
 export type FeatureItemFragmentResponse = Pick<FeatureItem, 'id'> & {
-  product: ProductFragmentResponse;
+  product: Pick<ProductFragmentResponse, 'id' | 'name' | 'offers' | 'price' | 'media'>;
 };
 
 export const FeatureSectionFragment = gql`

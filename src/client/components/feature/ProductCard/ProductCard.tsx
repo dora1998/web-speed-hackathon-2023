@@ -1,7 +1,7 @@
 import * as currencyFormatter from 'currency-formatter';
 import type { FC } from 'react';
 
-import type { ProductFragmentResponse } from '../../../graphql/fragments';
+import type { FeatureItemFragmentResponse } from '../../../graphql/fragments';
 import { useActiveOffer } from '../../../hooks/useActiveOffer';
 import { Anchor } from '../../foundation/Anchor';
 import { AspectRatio } from '../../foundation/AspectRatio';
@@ -11,13 +11,13 @@ import { ProductOfferLabel } from '../../product/ProductOfferLabel';
 import * as styles from './ProductCard.styles';
 
 type Props = {
-  product: ProductFragmentResponse;
+  product: FeatureItemFragmentResponse['product'];
 };
 
 export const ProductCard: FC<Props> = ({ product }) => {
   const thumbnailFile = product.media.find((productMedia) => productMedia.isThumbnail)?.file;
 
-  const { activeOffer } = useActiveOffer(product);
+  const { activeOffer } = useActiveOffer(product.offers);
   const price = activeOffer?.price ?? product.price;
 
   return (
