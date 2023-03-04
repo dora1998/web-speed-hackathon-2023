@@ -9,6 +9,7 @@ export default defineConfig(async () => {
   return {
     build: {
       outDir: 'dist/public',
+      sourcemap: true,
       target: 'chrome110',
     },
     plugins: [
