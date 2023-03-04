@@ -6,4 +6,5 @@ type Product {
   media: [ProductMedia!]!
   offers: [LimitedTimeOffer!]!
   reviews: [Review!]!
+  thumbnail: ProductMedia!
 }
