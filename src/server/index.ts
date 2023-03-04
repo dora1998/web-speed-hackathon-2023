@@ -57,12 +57,12 @@ async function init(): Promise<void> {
   );
 
   app.use(
-    serve(rootResolve('dist'), {
+    serve(rootResolve('dist/public'), {
       brotli: true,
       gzip: true,
       setHeaders: (res, path) => {
         // FIXME: ガバガバ判定
-        if (path.includes('dist/assets/')) {
+        if (path.includes('public/assets/')) {
           res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
           return;
         }
@@ -72,7 +72,7 @@ async function init(): Promise<void> {
     }),
   );
 
-  app.use(async (ctx) => await send(ctx, rootResolve('/dist/index.html')));
+  app.use(async (ctx) => await send(ctx, rootResolve('/dist/public/index.html')));
 
   httpServer.listen({ port: PORT }, () => {
     console.log(`🚀 Server ready at http://localhost:${PORT}`);

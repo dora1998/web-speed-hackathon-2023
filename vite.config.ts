@@ -8,6 +8,7 @@ import topLevelAwait from 'vite-plugin-top-level-await';
 export default defineConfig(async () => {
   return {
     build: {
+      outDir: 'dist/public',
       target: 'chrome110',
     },
     plugins: [
