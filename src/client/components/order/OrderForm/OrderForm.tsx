@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import _ from 'lodash';
-import type { ChangeEventHandler, FC } from 'react';
-import zipcodeJa from 'zipcode-ja';
+import type { FC } from 'react';
+import { useEffect } from 'react';
 
 import { PrimaryButton } from '../../foundation/PrimaryButton';
 import { TextInput } from '../../foundation/TextInput';
@@ -30,17 +30,27 @@ export const OrderForm: FC<Props> = ({ onSubmit }) => {
     onSubmit,
   });
 
-  const handleZipcodeChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    formik.handleChange(event);
+  useEffect(() => {
+    let isCurrent = true;
 
-    const zipCode = event.target.value;
-    const address = [...(_.cloneDeep(zipcodeJa)[zipCode]?.address ?? [])];
-    const prefecture = address.shift();
-    const city = address.join(' ');
+    (async () => {
+      const { default: zipcodeJa } = await import('zipcode-ja');
 
-    formik.setFieldValue('prefecture', prefecture);
-    formik.setFieldValue('city', city);
-  };
+      if (isCurrent) {
+        const zipCode = formik.values.zipCode;
+        const address = [...(_.cloneDeep(zipcodeJa[zipCode])?.address ?? [])];
+        const prefecture = address.shift();
+        const city = address.join(' ');
+
+        formik.setFieldValue('prefecture', prefecture);
+        formik.setFieldValue('city', city);
+      }
+    })();
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [formik]);
 
   return (
     <div className={styles.container()}>
@@ -50,7 +60,7 @@ export const OrderForm: FC<Props> = ({ onSubmit }) => {
             required
             id="zipCode"
             label="郵便番号"
-            onChange={handleZipcodeChange}
+            onChange={formik.handleChange}
             placeholder="例: 1500042"
             value={formik.values.zipCode}
           />
