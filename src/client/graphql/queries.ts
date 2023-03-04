@@ -6,6 +6,7 @@ import type {
   ProductReviewFragmentResponse,
   ProductWithReviewFragmentResponse,
   RecommendationFragmentResponse,
+  ZipcodeFragmentResponse,
 } from './fragments';
 import {
   AuthUserFragment,
@@ -13,6 +14,7 @@ import {
   ProductReviewFragment,
   ProductWithReviewFragment,
   RecommendationFragment,
+  ZipcodeFragment,
 } from './fragments';
 
 export const GetAuthUserQuery = gql`
@@ -78,4 +80,17 @@ export const GetFeatureSectionsQuery = gql`
 `;
 export type GetFeatureSectionsQueryResponse = {
   features: FeatureSectionFragmentResponse[];
+};
+
+export const GetZipcodeQuery = gql`
+  ${ZipcodeFragment}
+
+  query GetZipcode($code: String!) {
+    zipcode(code: $code) {
+      ...ZipcodeFragment
+    }
+  }
+`;
+export type GetZipcodeQueryResponse = {
+  zipcode: ZipcodeFragmentResponse | null;
 };

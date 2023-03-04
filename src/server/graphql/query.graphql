@@ -3,5 +3,6 @@ type Query {
   recommendations: [Recommendation!]!
   features: [FeatureSection!]!
   user(id: Int!): User!
+  zipcode(code: String!): Zipcode
   me: User
 }

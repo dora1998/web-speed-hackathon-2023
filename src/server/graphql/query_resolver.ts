@@ -1,5 +1,6 @@
 import type { Context } from '@apollo/client';
 import type { GraphQLFieldResolver } from 'graphql';
+import zipcodeJa from 'zipcode-ja';
 
 import { FeatureSection } from '../../model/feature_section';
 import { Product } from '../../model/product';
@@ -13,6 +14,7 @@ type QueryResolver = {
   product: GraphQLFieldResolver<unknown, Context, { id: number }, Promise<Product>>;
   recommendations: GraphQLFieldResolver<unknown, Context, never, Promise<Recommendation[]>>;
   user: GraphQLFieldResolver<unknown, Context, { id: number }, Promise<User>>;
+  zipcode: GraphQLFieldResolver<unknown, Context, { code: string }, Promise<User>>;
 };
 
 export const queryResolver: QueryResolver = {
@@ -39,5 +41,8 @@ export const queryResolver: QueryResolver = {
     return dataSource.manager.findOneOrFail(User, {
       where: { id: args.id },
     });
+  },
+  zipcode: (_parent, args) => {
+    return zipcodeJa[args.code];
   },
 };

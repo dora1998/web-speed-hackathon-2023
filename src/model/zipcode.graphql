@@ -1,0 +1,8 @@
+type Zipcode {
+  zipcode: String
+  zipcodeOld: String
+  jisX0402: String
+  address: [String!]!
+  ruby: [String!]!
+  status: [Int!]!
+}
