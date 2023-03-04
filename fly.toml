@@ -1,3 +1,6 @@
+# fly.toml file generated for wsh2023-dora on 2023-03-04T11:06:28+09:00
+
+app = "wsh2023-dora"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
