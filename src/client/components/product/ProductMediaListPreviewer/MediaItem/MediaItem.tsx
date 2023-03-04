@@ -20,7 +20,7 @@ export const MediaItem: FC<Props> = ({ file }) => {
       case 'video':
         return `${file.filename}.jpg`;
       case 'image':
-        return file.filename;
+        return file.filename.replace(/\.jpg$/, '_square.jpg');
     }
   }, [file.filename, mediaType]);
 
