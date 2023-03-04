@@ -1,5 +1,7 @@
 import { css } from '@emotion/css';
 
+import { BreakPoint } from '../../../utils/styles';
+
 export const container = () => css`
   background-color: #f4f4f4;
   display: grid;
@@ -12,14 +14,10 @@ export const itemList = () => css`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
 
-export const itemList__desktop = () => css`
-  flex-direction: row;
-`;
-
-export const itemList__mobile = () => css`
-  flex-direction: column;
+  @media (width >= ${BreakPoint.DESKTOP}px) {
+    flex-direction: row;
+  }
 `;
 
 export const item = () => css`

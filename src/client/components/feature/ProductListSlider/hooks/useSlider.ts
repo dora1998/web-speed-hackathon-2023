@@ -17,15 +17,11 @@ export const useSlider = ({ items }: { items: unknown[] }) => {
       });
     });
 
-    let timer = (function tick() {
-      return setImmediate(() => {
-        updateVisibleItemCount();
-        timer = tick();
-      });
-    })();
+    updateVisibleItemCount();
+    window.addEventListener('resize', updateVisibleItemCount);
 
     return () => {
-      clearImmediate(timer);
+      window.removeEventListener('resize', updateVisibleItemCount);
     };
   }, []);
 

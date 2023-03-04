@@ -23,19 +23,16 @@ export class GetDeviceType extends Component<Props> {
 
   componentDidMount(): void {
     this._checkIsDesktop();
+    window.addEventListener('resize', this._checkIsDesktop.bind(this));
   }
 
   componentWillUnmount(): void {
-    if (this._timer != null) {
-      window.clearImmediate(this._timer);
-    }
+    window.removeEventListener('resize', this._checkIsDesktop.bind(this));
   }
 
   private _checkIsDesktop() {
     this._windowWidth = window.innerWidth;
-    this.forceUpdate(() => {
-      this._timer = window.setImmediate(this._checkIsDesktop.bind(this));
-    });
+    this.forceUpdate();
   }
 
   render() {
@@ -45,3 +42,14 @@ export class GetDeviceType extends Component<Props> {
     });
   }
 }
+
+// TODO: 後でやる
+// export const GetDeviceTypeFC: React.FC<Props> = ({children: render}) => {
+//   const [deviceType, setDeviceType] = useState(DeviceType.DESKTOP);
+
+//   const mediaQueryList = window.matchMedia("(orientation: portrait)");
+
+//   return render({
+//     deviceType: this._windowWidth >= 1024 ? DeviceType.DESKTOP : DeviceType.MOBILE,
+//   });
+// }
