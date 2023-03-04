@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { lazy } from 'react';
 import * as Router from 'react-router-dom';
 
+import { withAuthorized } from '../../../../server/utils/auth';
 import { GetProductDetailsQuery } from '../../../graphql/queries';
 import { apolloClient } from '../../../utils/apollo_client';
 import { Layout } from '../Layout';
@@ -22,13 +23,16 @@ const productDetailLoader: Router.LoaderFunction = async ({ params }) => {
   return null;
 };
 
+const orderLoader: Router.LoaderFunction = withAuthorized(() => null);
+const orderCompleteLoader: Router.LoaderFunction = withAuthorized(() => null);
+
 const router = Router.createBrowserRouter(
   Router.createRoutesFromElements(
     <Router.Route element={<Layout />} path="/">
       <Router.Route element={<Top />} path="" />
       <Router.Route element={<ProductDetail />} loader={productDetailLoader} path="product/:productId" />
-      <Router.Route element={<Order />} path="order" />
-      <Router.Route element={<OrderComplete />} path="order/complete" />
+      <Router.Route element={<Order />} loader={orderLoader} path="order" />
+      <Router.Route element={<OrderComplete />} loader={orderCompleteLoader} path="order/complete" />
       <Router.Route element={<NotFound />} path="*" />
     </Router.Route>,
   ),

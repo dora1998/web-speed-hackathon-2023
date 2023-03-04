@@ -15,18 +15,10 @@ import * as styles from './Order.styles';
 export const Order: FC = () => {
   const navigate = useNavigate();
 
-  const { authUser, authUserLoading, isAuthUser } = useAuthUser();
+  const { authUser } = useAuthUser();
   const { updateCartItem } = useUpdateCartItem();
   const { submitOrder } = useSubmitOrder();
   const { order } = useOrder();
-
-  if (authUserLoading) {
-    return null;
-  }
-  if (!isAuthUser) {
-    navigate('/');
-    return null;
-  }
 
   const renderContents = () => {
     if (!authUser || order == undefined || order.items.length === 0) {
