@@ -56,8 +56,21 @@ async function init(): Promise<void> {
     }),
   );
 
-  app.use(serve(rootResolve('dist'), { brotli: true, gzip: true }));
-  app.use(serve(rootResolve('public')));
+  app.use(
+    serve(rootResolve('dist'), {
+      brotli: true,
+      gzip: true,
+      setHeaders: (res, path) => {
+        // FIXME: ガバガバ判定
+        if (path.includes('dist/assets/')) {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          return;
+        }
+
+        res.setHeader('Cache-Control', 'public, no-cache');
+      },
+    }),
+  );
 
   app.use(async (ctx) => await send(ctx, rootResolve('/dist/index.html')));
 
