@@ -23,7 +23,12 @@ export const ProductHeroImage: FC<Props> = ({ product, title }) => {
             <Anchor href={`/product/${product.id}`}>
               <div className={styles.container()}>
                 <AspectRatio ratioHeight={9} ratioWidth={16}>
-                  <img className={styles.image()} height={576} src={product.thumbnail.file.filename} width={1024} />
+                  <img
+                    className={styles.image()}
+                    height={576}
+                    src={product.thumbnail.file.filename.replace(/\.jpg$/, '.webp')}
+                    width={1024}
+                  />
                 </AspectRatio>
 
                 <div className={styles.overlay()}>

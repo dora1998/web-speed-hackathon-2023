@@ -20,7 +20,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
   const price = activeOffer?.price ?? product.price;
 
   const thumbFilename = useMemo(
-    () => product.thumbnail.file.filename.replace(/\.jpg$/, '_thumb.jpg'),
+    () => product.thumbnail.file.filename.replace(/\.jpg$/, '_thumb.webp'),
     [product.thumbnail.file.filename],
   );
 
