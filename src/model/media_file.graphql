@@ -1,4 +1,4 @@
-type MediaFile {
+type MediaFile @cacheControl(maxAge: 3600) {
   id: Int!
   filename: String!
 }

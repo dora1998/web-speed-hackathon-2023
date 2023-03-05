@@ -1,4 +1,4 @@
-type Profile {
+type Profile @cacheControl(maxAge: 3600) {
   id: Int!
   name: String!
   avatar: MediaFile!

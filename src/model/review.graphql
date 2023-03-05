@@ -1,4 +1,4 @@
-type Review {
+type Review @cacheControl(maxAge: 3600) {
   id: Int!
   user: User!
   postedAt: String!

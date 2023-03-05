@@ -1,4 +1,4 @@
-type ProductMedia {
+type ProductMedia @cacheControl(maxAge: 3600) {
   id: Int!
   file: MediaFile!
   isThumbnail: Boolean!

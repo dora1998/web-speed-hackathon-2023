@@ -1,4 +1,4 @@
-type FeatureItem {
+type FeatureItem @cacheControl(maxAge: 3600) {
   id: Int!
   product: Product!
 }

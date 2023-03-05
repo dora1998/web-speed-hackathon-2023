@@ -1,4 +1,4 @@
-type Zipcode {
+type Zipcode @cacheControl(maxAge: 3600) {
   zipcode: String
   zipcodeOld: String
   jisX0402: String

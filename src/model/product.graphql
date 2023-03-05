@@ -1,10 +1,10 @@
-type Product {
+type Product @cacheControl(maxAge: 3600) {
   id: Int!
   name: String!
   price: Int!
   description: String!
   media: [ProductMedia!]!
   offers: [LimitedTimeOffer!]!
-  reviews: [Review!]!
+  reviews: [Review!]! @cacheControl(maxAge: 0)
   thumbnail: ProductMedia!
 }

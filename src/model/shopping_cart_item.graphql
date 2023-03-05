@@ -1,4 +1,4 @@
-type ShoppingCartItem {
+type ShoppingCartItem @cacheControl(scope: PRIVATE) {
   id: Int!
   product: Product!
   amount: Int!

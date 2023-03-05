@@ -1,4 +1,4 @@
-type User {
+type User @cacheControl(scope: PRIVATE) {
   id: Int!
   email: String!
   profile: Profile!

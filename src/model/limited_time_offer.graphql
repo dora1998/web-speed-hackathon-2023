@@ -1,4 +1,4 @@
-type LimitedTimeOffer {
+type LimitedTimeOffer @cacheControl(maxAge: 3600) {
   id: Int!
   price: Int!
   startDate: String!
