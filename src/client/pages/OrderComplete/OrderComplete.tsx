@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
+import { Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { AspectRatio } from '../../components/foundation/AspectRatio';
@@ -11,9 +12,13 @@ import { useRecommendation } from '../../hooks/useRecommendation';
 
 import * as styles from './OrderComplete.styles';
 
-export const OrderComplete: FC = () => {
+const RecommendedBlock: FC = () => {
   const { recommendation } = useRecommendation();
 
+  return <ProductHeroImage product={recommendation.product} title={recommendation.product.name} />;
+};
+
+export const OrderComplete: FC = () => {
   return (
     <>
       <Helmet>
@@ -42,10 +47,17 @@ export const OrderComplete: FC = () => {
 
               <div className={styles.recommended()}>
                 <h2 className={styles.recommendedHeading()}>こちらの商品もオススメです</h2>
-                {/* FIXME: CLS対策 */}
-                {recommendation != null && (
-                  <ProductHeroImage product={recommendation.product} title={recommendation.product.name} />
-                )}
+                <Suspense
+                  fallback={
+                    <WidthRestriction>
+                      <AspectRatio ratioHeight={9} ratioWidth={16}>
+                        <div style={{ height: '100%', width: '100%' }} />
+                      </AspectRatio>
+                    </WidthRestriction>
+                  }
+                >
+                  <RecommendedBlock />
+                </Suspense>
               </div>
 
               <div className={styles.backToTopButtonWrapper()}>
