@@ -17,7 +17,7 @@ export const MediaItemPreviewer: FC<Props> = ({ file }) => {
 
   return (
     <div className={styles.container()}>
-      {type === 'image' && <Image fill src={file.filename} />}
+      {type === 'image' && <Image fill src={file.filename.replace(/\.jpg$/, '.webp')} />}
       {type === 'video' && (
         <GetDeviceType>
           {({ deviceType }) => (
@@ -30,7 +30,7 @@ export const MediaItemPreviewer: FC<Props> = ({ file }) => {
                 [styles.video__desktop()]: deviceType === DeviceType.DESKTOP,
                 [styles.video__mobile()]: deviceType === DeviceType.MOBILE,
               })}
-              src={file.filename.replace(/\.jpg$/, '.webp')}
+              src={file.filename}
             />
           )}
         </GetDeviceType>
